@@ -1,16 +1,1516 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>Mahi Makeup Studio</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahi Makeup Studio | Premium Beauty Parlour in Beniganj</title>
+  <meta name="description" content="Mahi Makeup Studio - Premium beauty parlour in Beniganj near Punjab National Bank. Expert bridal makeup, spa, nails, hairstyling and more by Mahi Gupta." />
+  <meta property="og:title" content="Mahi Makeup Studio | Premium Beauty Parlour" />
+  <meta property="og:description" content="Luxury beauty services by Mahi Gupta in Beniganj. Bridal makeup, spa, nails and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================
+       RESET & BASE
+    ============================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0A0A0A;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; font-family: 'Poppins', sans-serif; border: none; background: none; }
+    input, textarea, select { font-family: 'Poppins', sans-serif; }
+
+    /* ============================
+       CSS VARIABLES
+    ============================ */
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #FCF6BA;
+      --gold-dark: #B38728;
+      --gold-dim: rgba(212,175,55,0.18);
+      --gold-border: rgba(212,175,55,0.25);
+      --bg: #0A0A0A;
+      --bg-2: #080808;
+      --bg-card: rgba(255,255,255,0.04);
+      --text: rgba(225, 215, 200, 0.90);
+      --text-dim: rgba(200, 190, 175, 0.70);
+      --white: #ffffff;
+    }
+
+    /* ============================
+       UTILITIES
+    ============================ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .text-gold { color: var(--gold); }
+    .text-white { color: #fff; }
+    .text-dim { color: var(--text-dim); }
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .section-title.gold-gradient {
+      background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 40%, #D4AF37 60%, #B38728 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gold-line { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); border-radius: 2px; margin-bottom: 32px; }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 16px;
+      background: linear-gradient(135deg, #BF953F, #D4AF37, #B38728);
+      color: #0A0A0A;
+      box-shadow: 0 4px 28px rgba(212,175,55,0.32);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(212,175,55,0.45); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 50px; font-weight: 500; font-size: 15px;
+      border: 2px solid rgba(212,175,55,0.5); color: var(--gold);
+      background: rgba(212,175,55,0.05);
+      transition: all 0.25s;
+    }
+    .btn-outline:hover { background: rgba(212,175,55,0.12); border-color: var(--gold); }
+
+    /* ============================
+       ANIMATIONS
+    ============================ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmer {
+      0%   { transform: translateX(-150%); }
+      100% { transform: translateX(150%); }
+    }
+    @keyframes pulseGreen {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+      50%       { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+    }
+    @keyframes pulseGold {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
+      50%       { box-shadow: 0 0 0 14px rgba(212,175,55,0); }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    /* ============================
+       STICKY NAVBAR
+    ============================ */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 0;
+      transition: all 0.4s;
+    }
+    #navbar.scrolled {
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(16px);
+      padding: 12px 0;
+      box-shadow: 0 2px 24px rgba(212,175,55,0.08);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700;
+      background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: rgba(220,210,195,0.85);
+      transition: color 0.2s; white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .lang-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 50px; font-size: 13px; font-weight: 600;
+      border: 1px solid rgba(212,175,55,0.35); color: var(--gold);
+      background: rgba(212,175,55,0.06);
+      transition: all 0.2s;
+    }
+    .lang-btn:hover { background: rgba(212,175,55,0.14); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--gold); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 4px;
+      background: rgba(0,0,0,0.96); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--gold-border);
+      padding: 16px 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 10px 0; font-size: 15px; font-weight: 500; color: rgba(220,210,195,0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ============================
+       HERO SECTION
+    ============================ */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; text-align: center;
+      background: #050505;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&q=80');
+      background-size: cover; background-position: center;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 50%, #0A0A0A 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 860px; padding: 120px 20px 60px; }
+    .hero-badge {
+      display: inline-block; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 600;
+      padding: 7px 20px; border-radius: 50px; margin-bottom: 24px;
+      color: var(--gold); border: 1px solid rgba(212,175,55,0.4); background: rgba(212,175,55,0.08);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1.1;
+      background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 40%, #D4AF37 60%, #B38728 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s 0.2s ease both;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 300; color: rgba(240,230,210,0.9);
+      margin-bottom: 44px;
+      animation: fadeInUp 0.8s 0.4s ease both;
+    }
+    .hero-buttons {
+      display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+      animation: fadeInUp 0.8s 0.6s ease both;
+    }
+    .hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .hero-scroll-line { width: 1px; height: 56px; background: linear-gradient(to bottom, rgba(212,175,55,0.6), transparent); }
+    .hero-scroll-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+    /* ============================
+       ABOUT SECTION
+    ============================ */
+    #about { padding: 100px 0; background: #0A0A0A; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-img-wrap { position: relative; }
+    .about-img-frame {
+      position: absolute; inset: -16px; border-radius: 20px;
+      border: 1px solid rgba(212,175,55,0.28); transform: translate(14px, 14px); z-index: 0;
+    }
+    .about-img {
+      position: relative; z-index: 1; border-radius: 20px; width: 100%; height: 460px; object-fit: cover;
+      background: linear-gradient(135deg, #2a1b00, #1a1a1a);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .about-img-placeholder {
+      width: 100%; height: 460px; border-radius: 20px; position: relative; z-index: 1; overflow: hidden;
+      background: linear-gradient(135deg, #2a1b00 0%, #1a1200 40%, #0d0d0d 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    }
+    .about-img-placeholder .face-icon { font-size: 80px; }
+    .about-img-placeholder p { color: rgba(212,175,55,0.7); font-size: 14px; letter-spacing: 0.1em; }
+    .about-caption {
+      position: absolute; bottom: 16px; left: 16px; right: 16px; z-index: 2;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(12px);
+      border: 1px solid rgba(212,175,55,0.25); border-radius: 14px;
+      padding: 14px 18px;
+    }
+    .about-caption h4 { font-size: 18px; color: #fff; }
+    .about-caption p { font-size: 13px; color: var(--gold); margin-top: 2px; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+    .stat-card {
+      text-align: center; padding: 20px 12px; border-radius: 18px;
+      background: var(--bg-card); border: 1px solid var(--gold-border);
+      transition: all 0.3s;
+    }
+    .stat-card:hover { border-color: rgba(212,175,55,0.5); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(212,175,55,0.1); }
+    .stat-card .num { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); font-weight: 700; }
+    .stat-card .lbl { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ============================
+       SERVICES SECTION
+    ============================ */
+    #services { padding: 100px 0; background: #080808; }
+    .services-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
+    .service-card {
+      padding: 28px; border-radius: 20px;
+      background: var(--bg-card); border: 1px solid rgba(212,175,55,0.15);
+      transition: all 0.35s; display: flex; flex-direction: column; gap: 12px;
+    }
+    .service-card:hover {
+      border-color: rgba(212,175,55,0.5); transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(212,175,55,0.12);
+    }
+    .service-icon {
+      width: 52px; height: 52px; border-radius: 14px; font-size: 24px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2);
+    }
+    .service-card h3 { font-size: 16px; color: #fff; font-family: 'Playfair Display', serif; }
+    .service-card p { font-size: 13px; color: var(--text-dim); flex: 1; line-height: 1.6; }
+    .service-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--gold);
+      transition: gap 0.2s;
+    }
+    .service-link:hover { gap: 10px; }
+    .service-link .arr { font-size: 16px; transition: transform 0.2s; }
+    .service-link:hover .arr { transform: translateX(4px); }
+
+    /* ============================
+       GALLERY SECTION
+    ============================ */
+    #gallery { padding: 100px 0; background: #0A0A0A; }
+    .gallery-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .gallery-item {
+      aspect-ratio: 4/5; border-radius: 16px; overflow: hidden; position: relative;
+      border: 1px solid rgba(212,175,55,0.1);
+      cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .gallery-item:hover { transform: scale(1.02); box-shadow: 0 8px 32px rgba(212,175,55,0.15); }
+    .gallery-item:nth-child(1) { background: linear-gradient(135deg, #2a1b00, #0d0b00); }
+    .gallery-item:nth-child(2) { background: linear-gradient(135deg, #1c1c1c, #0a0a0a); }
+    .gallery-item:nth-child(3) { background: linear-gradient(135deg, #3b2a0d, #111); }
+    .gallery-item:nth-child(4) { background: linear-gradient(135deg, #111, #0A0A0A); }
+    .gallery-item:nth-child(5) { background: linear-gradient(135deg, #222, #1a1a1a); }
+    .gallery-item:nth-child(6) { background: linear-gradient(135deg, #31250f, #000); }
+    .gallery-inner {
+      width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    }
+    .gallery-inner .g-icon { font-size: 36px; opacity: 0.5; }
+    .gallery-inner .g-label { font-size: 11px; color: rgba(212,175,55,0.5); letter-spacing: 0.15em; text-transform: uppercase; }
+    .gallery-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 12px 14px; display: flex; justify-content: space-between;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay .before { color: rgba(255,255,255,0.7); }
+    .gallery-overlay .after { color: var(--gold); }
+    @media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ============================
+       OFFERS SECTION
+    ============================ */
+    #offers {
+      padding: 100px 0; background: #0A0A0A;
+      border-top: 1px solid rgba(212,175,55,0.14);
+      border-bottom: 1px solid rgba(212,175,55,0.14);
+    }
+    .offers-header { text-align: center; margin-bottom: 56px; }
+    .offers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .offer-card {
+      padding: 32px; border-radius: 20px; overflow: hidden; position: relative;
+      background: var(--bg-card); border: 1px solid rgba(212,175,55,0.22);
+      transition: all 0.3s;
+    }
+    .offer-card:hover { border-color: rgba(212,175,55,0.5); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(212,175,55,0.1); }
+    .offer-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 40%; height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(252,246,186,0.07) 50%, transparent 100%);
+      animation: shimmer 3s infinite; pointer-events: none;
+    }
+    .offer-badge {
+      display: inline-block; padding: 5px 18px; border-radius: 50px; font-size: 12px; font-weight: 700; margin-bottom: 18px;
+      background: linear-gradient(135deg, #BF953F, #D4AF37);
+      color: #0A0A0A;
+      box-shadow: 0 0 16px rgba(212,175,55,0.3);
+    }
+    .offer-card h3 { font-size: 22px; color: #fff; margin-bottom: 10px; }
+    .offer-card p { font-size: 14px; color: var(--text-dim); margin-bottom: 28px; line-height: 1.7; }
+    .offer-btn {
+      display: block; width: 100%; text-align: center; padding: 12px;
+      border: 2px solid var(--gold); border-radius: 12px; color: var(--gold);
+      font-weight: 600; font-size: 14px; transition: all 0.25s;
+    }
+    .offer-btn:hover { background: linear-gradient(135deg, #BF953F, #D4AF37); color: #0A0A0A; }
+
+    /* ============================
+       REVIEWS SECTION
+    ============================ */
+    #reviews { padding: 100px 0; background: #0A0A0A; }
+    .reviews-header { text-align: center; margin-bottom: 56px; }
+    .reviews-layout { display: grid; grid-template-columns: 1fr 380px; gap: 40px; }
+    .reviews-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-content: start; }
+    .review-card {
+      padding: 28px; border-radius: 18px;
+      background: var(--bg-card); border: 1px solid rgba(212,175,55,0.15);
+    }
+    .stars { display: flex; gap: 4px; margin-bottom: 14px; }
+    .star { font-size: 16px; color: #facc15; }
+    .star.empty { color: #3f3f3f; }
+    .review-text { font-size: 13px; color: rgba(225,215,200,0.85); font-style: italic; line-height: 1.7; margin-bottom: 14px; }
+    .review-author { font-size: 13px; font-weight: 600; color: #fff; font-family: 'Playfair Display', serif; }
+    .review-form-wrap {
+      padding: 32px; border-radius: 20px; position: sticky; top: 90px;
+      background: var(--bg-card); border: 1px solid rgba(212,175,55,0.25);
+      height: fit-content;
+    }
+    .review-form-wrap h3 { font-size: 20px; color: #fff; margin-bottom: 24px; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 13px; font-weight: 500; color: var(--text-dim); margin-bottom: 7px; }
+    .form-input {
+      width: 100%; padding: 12px 16px; border-radius: 12px; font-size: 14px; color: #fff; outline: none;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.25);
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: rgba(212,175,55,0.6); }
+    .form-input::placeholder { color: rgba(200,190,175,0.4); }
+    textarea.form-input { resize: none; }
+    .star-rating { display: flex; gap: 6px; }
+    .star-rating .s {
+      font-size: 28px; cursor: pointer; color: #3f3f3f; transition: color 0.15s, transform 0.15s;
+    }
+    .star-rating .s:hover, .star-rating .s.active { color: #facc15; transform: scale(1.15); }
+    .submit-btn {
+      width: 100%; padding: 13px; border-radius: 12px; font-size: 15px; font-weight: 700;
+      background: linear-gradient(135deg, #BF953F, #D4AF37);
+      color: #0A0A0A;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(212,175,55,0.22);
+    }
+    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(212,175,55,0.3); }
+    .success-msg { text-align: center; padding: 30px; }
+    .success-msg .check { font-size: 48px; margin-bottom: 12px; }
+    .success-msg p { color: #fff; font-size: 16px; font-weight: 600; }
+    .success-msg small { color: var(--text-dim); font-size: 13px; }
+    @media (max-width: 900px) {
+      .reviews-layout { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================
+       BOOKING SECTION
+    ============================ */
+    #book { padding: 100px 0; background: #080808; }
+    .book-header { text-align: center; margin-bottom: 48px; }
+    .book-box {
+      max-width: 520px; margin: 0 auto; padding: 48px 40px;
+      border-radius: 28px; background: var(--bg-card); border: 1px solid rgba(212,175,55,0.22);
+      box-shadow: 0 0 48px rgba(212,175,55,0.05);
+    }
+    .book-step { display: none; }
+    .book-step.active { display: block; animation: fadeInUp 0.4s ease forwards; }
+    .step-icon { width: 72px; height: 72px; margin: 0 auto 24px; border-radius: 50%; font-size: 32px; display: flex; align-items: center; justify-content: center; background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.25); }
+    .phone-input-wrap { position: relative; }
+    .phone-prefix { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-weight: 500; color: rgba(180,170,160,0.7); font-size: 15px; }
+    .phone-input-wrap .form-input { padding-left: 52px; font-size: 16px; letter-spacing: 0.05em; }
+    .otp-input { text-align: center; font-size: 28px; letter-spacing: 0.5em; }
+    .payment-options { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+    .pay-option {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px; border-radius: 12px; cursor: pointer;
+      border: 1px solid rgba(212,175,55,0.2); transition: all 0.2s;
+    }
+    .pay-option:hover { border-color: rgba(212,175,55,0.5); background: rgba(212,175,55,0.05); }
+    .pay-option input[type=radio] { accent-color: var(--gold); width: 18px; height: 18px; }
+    .pay-option span { font-size: 14px; font-weight: 500; color: #fff; }
+    .wa-cta { margin-top: 32px; text-align: center; }
+    .wa-cta p { font-size: 14px; color: var(--text-dim); margin-bottom: 14px; }
+    .wa-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 15px;
+      background: #25D366; color: #fff;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.3); transition: all 0.25s;
+    }
+    .wa-btn:hover { background: #1db954; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
+    .success-box { text-align: center; padding: 40px 0; }
+    .success-box .big-icon { font-size: 64px; margin-bottom: 16px; }
+    .spinner { width: 24px; height: 24px; border: 3px solid rgba(0,0,0,0.2); border-top-color: #0A0A0A; border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; }
+    @media (max-width: 560px) { .book-box { padding: 32px 20px; } }
+
+    /* ============================
+       CONTACT SECTION
+    ============================ */
+    #contact { padding: 100px 0; background: #0A0A0A; border-top: 1px solid rgba(212,175,55,0.1); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .contact-items { display: flex; flex-direction: column; gap: 28px; margin-bottom: 40px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
+    .contact-icon {
+      width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.22);
+    }
+    .contact-item h4 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; font-family: 'Poppins', sans-serif; }
+    .contact-item p, .contact-item a { font-size: 14px; color: rgba(225,215,200,0.82); }
+    .contact-item a:hover { color: var(--gold); }
+    .social-links { display: flex; gap: 14px; }
+    .social-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 12px; font-size: 13px; font-weight: 500;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(225,215,200,0.82); transition: all 0.25s;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .map-embed { border-radius: 24px; overflow: hidden; border: 2px solid rgba(212,175,55,0.22); height: 420px; }
+    .map-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    /* ============================
+       FOOTER
+    ============================ */
+    footer { padding: 36px 20px; text-align: center; border-top: 1px solid rgba(212,175,55,0.1); }
+    footer .logo { font-family: 'Playfair Display', serif; font-size: 20px; background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+    footer p { font-size: 12px; color: rgba(160,150,140,0.55); }
+
+    /* ============================
+       FLOATING WHATSAPP
+    ============================ */
+    #wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25D366; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+      animation: pulseGreen 2.2s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+    #wa-float:hover { transform: scale(1.1); }
+    #wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* ============================
+       ADMIN PANEL
+    ============================ */
+    #admin-overlay {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: #070707; overflow-y: auto;
+    }
+    #admin-overlay.show { display: flex; }
+    /* Login */
+    .admin-login {
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; width: 100%; padding: 40px 20px;
+    }
+    .admin-login.show { display: flex; }
+    .admin-login-card { width: 100%; max-width: 380px; }
+    .admin-login-icon {
+      width: 66px; height: 66px; border-radius: 18px; font-size: 28px;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+      background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.3);
+    }
+    .admin-login h1 { font-size: 28px; text-align: center; font-family: 'Playfair Display', serif; background: linear-gradient(135deg, #BF953F, #FCF6BA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .admin-login .sub { text-align: center; font-size: 13px; color: var(--text-dim); margin-bottom: 32px; margin-top: 4px; }
+    .admin-input {
+      width: 100%; padding: 13px 16px; border-radius: 12px; font-size: 14px; color: #fff; outline: none;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.25); transition: border-color 0.2s;
+    }
+    .admin-input:focus { border-color: rgba(212,175,55,0.6); box-shadow: 0 0 0 3px rgba(212,175,55,0.08); }
+    .admin-input::placeholder { color: rgba(200,190,175,0.38); }
+    .admin-btn-primary {
+      padding: 12px 22px; border-radius: 12px; font-size: 14px; font-weight: 700;
+      background: linear-gradient(135deg, #BF953F, #D4AF37); color: #0A0A0A;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    .admin-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .admin-btn-primary:disabled { opacity: 0.5; transform: none; }
+    .admin-btn-danger {
+      padding: 7px 14px; border-radius: 10px; font-size: 13px; font-weight: 500;
+      background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #f87171;
+      transition: all 0.2s;
+    }
+    .admin-btn-danger:hover { background: rgba(239,68,68,0.22); }
+    .admin-btn-ghost {
+      padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 500;
+      background: rgba(255,255,255,0.06); color: rgba(200,190,175,0.7); transition: all 0.2s;
+    }
+    .admin-btn-ghost:hover { background: rgba(255,255,255,0.1); }
+    .pw-wrap { position: relative; }
+    .pw-toggle {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      color: rgba(200,190,175,0.5); font-size: 18px; cursor: pointer; user-select: none;
+    }
+    .admin-error { font-size: 13px; text-align: center; color: #f87171; }
+    /* Main Panel */
+    .admin-panel { display: none; flex: 1; min-height: 100vh; }
+    .admin-panel.show { display: flex; }
+    .admin-sidebar {
+      width: 230px; flex-shrink: 0; border-right: 1px solid rgba(212,175,55,0.1);
+      background: #0B0B0B; display: flex; flex-direction: column; min-height: 100vh;
+    }
+    .admin-sidebar-logo { padding: 22px 20px; border-bottom: 1px solid rgba(212,175,55,0.12); display: flex; align-items: center; gap: 10px; }
+    .admin-sidebar-logo .lgo { font-size: 22px; }
+    .admin-sidebar-logo .lname { font-family: 'Playfair Display', serif; font-size: 14px; background: linear-gradient(135deg, #BF953F, #FCF6BA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; }
+    .admin-sidebar-logo .lsub { font-size: 11px; color: rgba(160,150,140,0.6); }
+    .admin-nav { flex: 1; padding: 12px; }
+    .admin-nav-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px;
+      font-size: 13px; font-weight: 500; color: rgba(200,190,175,0.75);
+      cursor: pointer; transition: all 0.2s; margin-bottom: 2px; border: none; background: none; width: 100%; text-align: left;
+    }
+    .admin-nav-item:hover { background: rgba(212,175,55,0.1); color: var(--gold); }
+    .admin-nav-item.active { background: rgba(212,175,55,0.15); color: var(--gold); border-left: 3px solid var(--gold); }
+    .admin-nav-bottom { padding: 12px; border-top: 1px solid rgba(212,175,55,0.1); }
+    .admin-content-wrap { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .admin-topbar { padding: 14px 24px; border-bottom: 1px solid rgba(212,175,55,0.1); background: #0B0B0B; display: flex; align-items: center; justify-content: space-between; }
+    .admin-topbar-title { font-size: 16px; font-weight: 600; color: #fff; text-transform: capitalize; }
+    .online-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; display: inline-block; margin-right: 6px; }
+    .admin-content { flex: 1; overflow-y: auto; padding: 28px 24px; }
+    .admin-tab { display: none; }
+    .admin-tab.active { display: block; animation: fadeInUp 0.3s ease forwards; }
+    /* Stats */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+    .s-card { padding: 20px; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.15); }
+    .s-card .s-icon { font-size: 26px; margin-bottom: 10px; }
+    .s-card .s-num { font-size: 28px; font-family: 'Playfair Display', serif; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .s-card .s-lbl { font-size: 12px; color: var(--text-dim); }
+    @media (max-width: 700px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+    /* Quick actions */
+    .quick-actions { padding: 20px; border-radius: 18px; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.18); margin-bottom: 28px; }
+    .qa-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 14px; }
+    .qa-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+    .qa-wa { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 12px; font-size: 13px; font-weight: 600; background: #25D366; color: #fff; transition: opacity 0.2s; }
+    .qa-wa:hover { opacity: 0.88; }
+    .qa-plain { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 12px; font-size: 13px; font-weight: 500; background: rgba(255,255,255,0.06); color: rgba(220,210,195,0.85); border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s; }
+    .qa-plain:hover { background: rgba(255,255,255,0.1); }
+    /* Item List */
+    .admin-list { display: flex; flex-direction: column; gap: 10px; }
+    .admin-list-item {
+      display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.12);
+    }
+    .ali-icon { width: 40px; height: 40px; border-radius: 10px; font-size: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(212,175,55,0.1); }
+    .ali-info { flex: 1; min-width: 0; }
+    .ali-name { font-size: 14px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ali-desc { font-size: 12px; color: var(--text-dim); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ali-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .ali-edit { padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--gold); background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2); cursor: pointer; transition: all 0.2s; }
+    .ali-edit:hover { background: rgba(212,175,55,0.2); }
+    /* Add/Edit Form */
+    .add-form {
+      padding: 20px; border-radius: 18px; margin-bottom: 20px;
+      background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.3);
+    }
+    .add-form-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 16px; }
+    .form-row { display: grid; grid-template-columns: 80px 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-row.full { grid-template-columns: 1fr; }
+    .add-form-actions { display: flex; gap: 10px; margin-top: 14px; }
+    /* Review items */
+    .rev-item {
+      display: flex; align-items: flex-start; gap: 14px; padding: 16px; border-radius: 14px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.12); margin-bottom: 10px;
+    }
+    .rev-avatar { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; background: rgba(212,175,55,0.15); color: var(--gold); }
+    .rev-body { flex: 1; min-width: 0; }
+    .rev-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+    .rev-name { font-size: 14px; font-weight: 600; color: #fff; }
+    .rev-stars { font-size: 13px; color: #facc15; }
+    .rev-date { font-size: 12px; color: rgba(160,150,140,0.6); }
+    .rev-text { font-size: 13px; color: rgba(210,200,185,0.78); line-height: 1.6; }
+    /* Mobile sidebar toggle */
+    .admin-mob-toggle { display: none; padding: 8px 14px; background: none; border: none; color: var(--gold); font-size: 22px; cursor: pointer; }
+    @media (max-width: 700px) {
+      .admin-sidebar { position: fixed; left: 0; top: 0; bottom: 0; z-index: 10; transform: translateX(-100%); transition: transform 0.3s; }
+      .admin-sidebar.open { transform: translateX(0); }
+      .admin-mob-toggle { display: inline-flex; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    .overlay-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9; }
+    .overlay-backdrop.show { display: block; }
+
+    /* ============================
+       MISC
+    ============================ */
+    .hidden { display: none !important; }
+    .section-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); margin: 0; }
+    @media (max-width: 480px) {
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .hero-buttons a { width: 100%; text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">MAHI</a>
+      <div class="nav-links">
+        <a href="#about" data-en="About" data-hi="हमारे बारे में">About</a>
+        <a href="#services" data-en="Services" data-hi="सेवाएं">Services</a>
+        <a href="#gallery" data-en="Gallery" data-hi="गैलरी">Gallery</a>
+        <a href="#offers" data-en="Offers" data-hi="ऑफ़र">Offers</a>
+        <a href="#reviews" data-en="Reviews" data-hi="समीक्षाएं">Reviews</a>
+        <a href="#book" data-en="Book" data-hi="बुक करें">Book</a>
+        <a href="#contact" data-en="Contact" data-hi="संपर्क">Contact</a>
+        <button class="lang-btn" id="langToggle" onclick="toggleLang()">🌐 HI</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="lang-btn" id="langToggleMob" onclick="toggleLang()" style="display:none;">🌐</button>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMobileMenu()" data-en="About" data-hi="हमारे बारे में">About</a>
+    <a href="#services" onclick="closeMobileMenu()" data-en="Services" data-hi="सेवाएं">Services</a>
+    <a href="#gallery" onclick="closeMobileMenu()" data-en="Gallery" data-hi="गैलरी">Gallery</a>
+    <a href="#offers" onclick="closeMobileMenu()" data-en="Offers" data-hi="ऑफ़र">Offers</a>
+    <a href="#reviews" onclick="closeMobileMenu()" data-en="Reviews" data-hi="समीक्षाएं">Reviews</a>
+    <a href="#book" onclick="closeMobileMenu()" data-en="Book" data-hi="बुक करें">Book</a>
+    <a href="#contact" onclick="closeMobileMenu()" data-en="Contact" data-hi="संपर्क">Contact</a>
+    <a href="#" onclick="closeMobileMenu();openAdmin();" style="color:var(--gold)">Admin Panel</a>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge" data-en="Premium Beauty Parlour" data-hi="प्रीमियम ब्यूटी पार्लर">Premium Beauty Parlour</div>
+    <h1 class="hero-title" data-en="Mahi Makeup Studio" data-hi="माही मेकअप स्टूडियो">Mahi Makeup Studio</h1>
+    <p class="hero-sub" data-en="Enhance Your Natural Beauty with Luxury Touch" data-hi="लक्ज़री स्पर्श के साथ अपनी प्राकृतिक सुंदरता बढ़ाएं">Enhance Your Natural Beauty with Luxury Touch</p>
+    <div class="hero-buttons">
+      <a href="https://wa.me/916386432826?text=I%20want%20to%20book%20appointment" target="_blank" class="btn-gold">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.849L.057 23.571a.75.75 0 00.918.918l5.722-1.475A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.693 9.693 0 01-4.942-1.353l-.354-.21-3.666.944.961-3.564-.23-.368A9.694 9.694 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+        <span data-en="Book on WhatsApp" data-hi="WhatsApp पर बुक करें">Book on WhatsApp</span>
+      </a>
+      <a href="#services" class="btn-outline" data-en="Explore Services" data-hi="सेवाएं देखें">Explore Services</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <div class="hero-scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about" class="fade-in">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-in">
+        <div class="about-img-frame"></div>
+        <div class="about-img-placeholder">
+          <div class="face-icon">💄</div>
+          <p data-en="Mahi Gupta — Lead Beauty Expert" data-hi="माही गुप्ता — प्रमुख ब्यूटी विशेषज्ञ">Mahi Gupta — Lead Beauty Expert</p>
+        </div>
+        <div class="about-caption">
+          <h4 data-en="Mahi Gupta" data-hi="माही गुप्ता">Mahi Gupta</h4>
+          <p data-en="Lead Beauty Expert" data-hi="प्रमुख ब्यूटी विशेषज्ञ">Lead Beauty Expert</p>
+        </div>
+      </div>
+      <div class="fade-in delay-1">
+        <span class="section-label" data-en="Our Story" data-hi="हमारी कहानी">Our Story</span>
+        <h2 class="section-title" data-en="About The Studio" data-hi="स्टूडियो के बारे में">About The Studio</h2>
+        <div class="gold-line"></div>
+        <p style="color:rgba(225,215,200,0.88);font-size:16px;line-height:1.8;margin-bottom:36px;" data-en="Professional beauty expert offering premium salon services in Beniganj near Punjab National Bank. With years of experience in bridal and everyday beauty, we bring out the best version of you in a luxurious, relaxing environment." data-hi="बेनीगंज, पंजाब नेशनल बैंक के पास, प्रीमियम सैलून सेवाएं प्रदान करने वाली पेशेवर ब्यूटी विशेषज्ञ। ब्राइडल और रोज़मर्रा के सौंदर्य में वर्षों के अनुभव के साथ, हम एक शानदार और आरामदायक माहौल में आपका सर्वश्रेष्ठ रूप सामने लाते हैं।">
+          Professional beauty expert offering premium salon services in Beniganj near Punjab National Bank. With years of experience in bridal and everyday beauty, we bring out the best version of you in a luxurious, relaxing environment.
+        </p>
+        <div class="about-stats">
+          <div class="stat-card fade-in delay-1"><div class="num">500+</div><div class="lbl" data-en="Happy Clients" data-hi="संतुष्ट ग्राहक">Happy Clients</div></div>
+          <div class="stat-card fade-in delay-2"><div class="num">5+</div><div class="lbl" data-en="Years Experience" data-hi="वर्ष का अनुभव">Years Experience</div></div>
+          <div class="stat-card fade-in delay-3"><div class="num">14</div><div class="lbl" data-en="Services" data-hi="सेवाएं">Services</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SERVICES ==================== -->
+<section id="services" style="padding:100px 0;background:#080808;">
+  <div class="container">
+    <div class="services-header fade-in">
+      <span class="section-label" data-en="What We Offer" data-hi="हम क्या प्रदान करते हैं">What We Offer</span>
+      <h2 class="section-title gold-gradient" data-en="Our Premium Services" data-hi="हमारी प्रीमियम सेवाएं">Our Premium Services</h2>
+      <p style="color:var(--text-dim);font-size:15px;" data-en="Indulge in our carefully curated selection of beauty treatments" data-hi="सौंदर्य उपचारों के हमारे सावधानीपूर्वक चुने गए चयन का आनंद लें">Indulge in our carefully curated selection of beauty treatments</p>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ==================== GALLERY ==================== -->
+<section id="gallery" style="padding:100px 0;background:#0A0A0A;">
+  <div class="container">
+    <div class="gallery-header fade-in">
+      <div>
+        <span class="section-label" data-en="Our Work" data-hi="हमारा काम">Our Work</span>
+        <h2 class="section-title" data-en="Gallery" data-hi="गैलरी">Gallery</h2>
+        <p style="color:var(--text-dim);font-size:14px;margin-top:6px;" data-en="Before & After transformations and our stunning work" data-hi="पहले और बाद के बदलाव और हमारा शानदार काम">Before &amp; After transformations and our stunning work</p>
+      </div>
+      <a href="https://www.instagram.com/mahimakeupstudio21" target="_blank" class="btn-outline fade-in delay-1" data-en="View Instagram" data-hi="इंस्टाग्राम देखें">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        View Instagram
+      </a>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item fade-in"><div class="gallery-inner"><div class="g-icon">💍</div><div class="g-label">Bridal Makeup</div></div><div class="gallery-overlay"><span class="before">Before</span><span class="after">After</span></div></div>
+      <div class="gallery-item fade-in delay-1"><div class="gallery-inner"><div class="g-icon">💅</div><div class="g-label">Nail Art</div></div><div class="gallery-overlay"><span class="before">Before</span><span class="after">After</span></div></div>
+      <div class="gallery-item fade-in delay-2"><div class="gallery-inner"><div class="g-icon">✨</div><div class="g-label">Skin Glow</div></div><div class="gallery-overlay"><span class="before">Before</span><span class="after">After</span></div></div>
+      <div class="gallery-item fade-in delay-1"><div class="gallery-inner"><div class="g-icon">💆</div><div class="g-label">Spa &amp; Relax</div></div><div class="gallery-overlay"><span class="before">Before</span><span class="after">After</span></div></div>
+      <div class="gallery-item fade-in delay-2"><div class="gallery-inner"><div class="g-icon">✂️</div><div class="g-label">Hairstyling</div></div><div class="gallery-overlay"><span class="before">Before</span><span class="after">After</span></div></div>
+      <div class="gallery-item fade-in delay-3"><div class="gallery-inner"><div class="g-icon">💄</div><div class="g-label">Party Makeup</div></div><div class="gallery-overlay"><span class="before">Before</span><span class="after">After</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== OFFERS ==================== -->
+<section id="offers">
+  <div class="container">
+    <div class="offers-header fade-in">
+      <span class="section-label" data-en="Limited Time" data-hi="सीमित समय">Limited Time</span>
+      <h2 class="section-title" data-en="Exclusive Offers" data-hi="विशेष ऑफ़र">Exclusive Offers</h2>
+      <p style="color:var(--text-dim);font-size:15px;" data-en="Special packages for our valued clients" data-hi="हमारे विशेष ग्राहकों के लिए विशेष पैकेज">Special packages for our valued clients</p>
+    </div>
+    <div class="offers-grid" id="offersGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ==================== REVIEWS ==================== -->
+<section id="reviews">
+  <div class="container">
+    <div class="reviews-header fade-in">
+      <span class="section-label" data-en="Testimonials" data-hi="प्रशंसापत्र">Testimonials</span>
+      <h2 class="section-title gold-gradient" data-en="Client Testimonials" data-hi="ग्राहक समीक्षाएं">Client Testimonials</h2>
+      <p style="color:var(--text-dim);font-size:15px;" data-en="What our beautiful clients have to say" data-hi="हमारे खूबसूरत ग्राहकों का क्या कहना है">What our beautiful clients have to say</p>
+    </div>
+    <div class="reviews-layout">
+      <div class="reviews-grid" id="reviewsGrid">
+        <!-- Populated by JS -->
+      </div>
+      <!-- Review Form -->
+      <div class="review-form-wrap fade-in delay-2">
+        <h3 data-en="Write a Review" data-hi="समीक्षा लिखें">Write a Review</h3>
+        <div id="reviewFormContent">
+          <div class="form-group">
+            <label class="form-label" data-en="Your Name" data-hi="आपका नाम">Your Name</label>
+            <input type="text" id="revName" class="form-input" placeholder="Enter your name..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-en="Rating" data-hi="रेटिंग">Rating</label>
+            <div class="star-rating" id="starRating">
+              <span class="s active" data-val="1">★</span>
+              <span class="s active" data-val="2">★</span>
+              <span class="s active" data-val="3">★</span>
+              <span class="s active" data-val="4">★</span>
+              <span class="s active" data-val="5">★</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-en="Your Experience" data-hi="आपका अनुभव">Your Experience</label>
+            <textarea id="revText" class="form-input" rows="4" placeholder="Share your experience..."></textarea>
+          </div>
+          <button class="submit-btn" onclick="submitReview()" data-en="Submit Review" data-hi="समीक्षा जमा करें">Submit Review</button>
+        </div>
+        <div id="reviewSuccess" class="success-msg hidden">
+          <div class="check">✨</div>
+          <p data-en="Thank you for your review!" data-hi="आपकी समीक्षा के लिए धन्यवाद!">Thank you for your review!</p>
+          <small data-en="Your feedback means a lot to us." data-hi="आपकी राय हमारे लिए बहुत मायने रखती है।">Your feedback means a lot to us.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BOOKING ==================== -->
+<section id="book">
+  <div class="container">
+    <div class="book-header fade-in">
+      <span class="section-label" data-en="Reserve Your Spot" data-hi="अपनी जगह आरक्षित करें">Reserve Your Spot</span>
+      <h2 class="section-title" data-en="Book Appointment" data-hi="अपॉइंटमेंट बुक करें">Book Appointment</h2>
+      <p style="color:var(--text-dim);font-size:15px;" data-en="Reserve your luxury beauty experience" data-hi="अपना लक्ज़री सौंदर्य अनुभव आरक्षित करें">Reserve your luxury beauty experience</p>
+    </div>
+    <div class="book-box fade-in delay-1">
+      <!-- Step 1: Phone -->
+      <div class="book-step active" id="step1">
+        <div class="step-icon">📱</div>
+        <div class="form-group">
+          <label class="form-label" data-en="Enter Phone Number" data-hi="फ़ोन नंबर दर्ज करें">Enter Phone Number</label>
+          <div class="phone-input-wrap">
+            <span class="phone-prefix">+91</span>
+            <input type="tel" id="phoneInput" class="form-input" maxlength="10" placeholder="XXXXXXXXXX" oninput="this.value=this.value.replace(/\D/g,'')" />
+          </div>
+        </div>
+        <button class="submit-btn" style="margin-top:8px;" onclick="sendOtp()" data-en="Send OTP" data-hi="OTP भेजें">Send OTP</button>
+      </div>
+      <!-- Step 2: OTP -->
+      <div class="book-step" id="step2">
+        <div class="step-icon">🔐</div>
+        <p style="color:var(--text-dim);text-align:center;font-size:14px;margin-bottom:18px;" id="otpSentMsg">OTP sent to your number</p>
+        <div class="form-group">
+          <label class="form-label" style="text-align:center;">Enter 4-digit OTP</label>
+          <input type="text" id="otpInput" class="form-input otp-input" maxlength="4" placeholder="0000" oninput="this.value=this.value.replace(/\D/g,'')" />
+        </div>
+        <p style="font-size:12px;color:var(--text-dim);text-align:center;margin-bottom:12px;">Use <strong style="color:var(--gold)">1234</strong> for demo</p>
+        <button class="submit-btn" onclick="verifyOtp()" data-en="Verify OTP" data-hi="OTP सत्यापित करें">Verify OTP</button>
+      </div>
+      <!-- Step 3: Payment -->
+      <div class="book-step" id="step3">
+        <div class="step-icon">💳</div>
+        <h3 style="text-align:center;color:#fff;margin-bottom:20px;font-size:18px;" data-en="Select Payment Method" data-hi="भुगतान विधि चुनें">Select Payment Method</h3>
+        <div class="payment-options">
+          <label class="pay-option"><input type="radio" name="pay" value="upi" checked /><span>UPI / QR Code</span></label>
+          <label class="pay-option"><input type="radio" name="pay" value="card" /><span>Credit / Debit Card</span></label>
+          <label class="pay-option"><input type="radio" name="pay" value="net" /><span>Net Banking</span></label>
+        </div>
+        <button class="submit-btn" style="margin-top:8px;" onclick="processPayment()" data-en="Proceed to Pay" data-hi="भुगतान करने के लिए आगे बढ़ें">Proceed to Pay</button>
+      </div>
+      <!-- Step 4: Success -->
+      <div class="book-step" id="step4">
+        <div class="success-box">
+          <div class="big-icon">✅</div>
+          <h3 style="color:#fff;font-size:22px;margin-bottom:8px;" data-en="Booking Confirmed!" data-hi="बुकिंग की पुष्टि हो गई!">Booking Confirmed!</h3>
+          <p style="color:var(--text-dim);font-size:14px;" data-en="We look forward to seeing you at Mahi Makeup Studio." data-hi="हम माही मेकअप स्टूडियो में आपका इंतजार कर रहे हैं।">We look forward to seeing you at Mahi Makeup Studio.</p>
+          <button onclick="resetBooking()" style="margin-top:24px;padding:10px 28px;border:2px solid var(--gold);border-radius:50px;color:var(--gold);font-size:14px;font-weight:600;transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='#0A0A0A'" onmouseout="this.style.background='transparent';this.style.color='var(--gold)'" data-en="Book Another" data-hi="और बुक करें">Book Another</button>
+        </div>
+      </div>
+    </div>
+    <div class="wa-cta fade-in delay-2">
+      <p data-en="Or Book Instantly via WhatsApp" data-hi="या WhatsApp के माध्यम से तुरंत बुक करें">Or Book Instantly via WhatsApp</p>
+      <a href="https://wa.me/916386432826?text=I%20want%20to%20book%20appointment" target="_blank" class="wa-btn">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.849L.057 23.571a.75.75 0 00.918.918l5.722-1.475A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.693 9.693 0 01-4.942-1.353l-.354-.21-3.666.944.961-3.564-.23-.368A9.694 9.694 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+        <span data-en="WhatsApp Booking" data-hi="WhatsApp बुकिंग">WhatsApp Booking</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;" class="fade-in">
+      <span class="section-label" data-en="Find Us" data-hi="हमें खोजें">Find Us</span>
+      <h2 class="section-title" data-en="Visit Our Studio" data-hi="हमारे स्टूडियो आएं">Visit Our Studio</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="fade-in">
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4 data-en="Address" data-hi="पता">Address</h4>
+              <p data-en="Beniganj, near Punjab National Bank" data-hi="बेनीगंज, पंजाब नेशनल बैंक के पास">Beniganj, near Punjab National Bank</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <h4 data-en="Working Hours" data-hi="काम के घंटे">Working Hours</h4>
+              <p data-en="Mon – Sun: 10:00 AM – 8:00 PM" data-hi="सोम – रवि: 10:00 AM – 8:00 PM">Mon – Sun: 10:00 AM – 8:00 PM</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <h4 data-en="Phone / WhatsApp" data-hi="फ़ोन / WhatsApp">Phone / WhatsApp</h4>
+              <a href="tel:6386432826">+91 63864 32826</a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-size:16px;color:#fff;margin-bottom:16px;font-family:'Playfair Display',serif;" data-en="Follow Us" data-hi="हमें फॉलो करें">Follow Us</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/mahimakeupstudio21" target="_blank" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              Instagram
+            </a>
+            <a href="https://youtube.com/@mahimakeupstudio21" target="_blank" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+              YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="map-embed fade-in delay-1">
+        <iframe src="https://maps.app.goo.gl/daXdh8oeWt9GjEBa9" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mahi Makeup Studio Location"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <p class="logo">Mahi Makeup Studio</p>
+  <p data-en="© 2025 Mahi Makeup Studio. All rights reserved. Beniganj, near Punjab National Bank." data-hi="© 2025 माही मेकअप स्टूडियो। सर्वाधिकार सुरक्षित।">© 2025 Mahi Makeup Studio. All rights reserved. Beniganj, near Punjab National Bank.</p>
+  <p style="margin-top:8px;font-size:11px;color:rgba(160,150,140,0.35);">
+    <a href="#" onclick="openAdmin();return false;" style="color:inherit;">Admin</a>
+  </p>
+</footer>
+
+<!-- ==================== FLOATING WHATSAPP ==================== -->
+<a id="wa-float" href="https://wa.me/916386432826?text=I%20want%20to%20book%20appointment" target="_blank" title="Book on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.849L.057 23.571a.75.75 0 00.918.918l5.722-1.475A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.693 9.693 0 01-4.942-1.353l-.354-.21-3.666.944.961-3.564-.23-.368A9.694 9.694 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+</a>
+
+<!-- ==================== ADMIN PANEL OVERLAY ==================== -->
+<div id="admin-overlay">
+  <!-- Login Screen -->
+  <div class="admin-login show" id="adminLogin">
+    <div class="admin-login-card">
+      <div class="admin-login-icon">💄</div>
+      <h1>Admin Panel</h1>
+      <p class="sub">Mahi Makeup Studio</p>
+      <div class="form-group">
+        <div class="pw-wrap">
+          <input type="password" id="adminPw" class="admin-input" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doAdminLogin()" />
+          <span class="pw-toggle" id="pwToggle" onclick="togglePw()">👁</span>
+        </div>
+      </div>
+      <p class="admin-error hidden" id="loginError">Incorrect password. Try again.</p>
+      <button class="admin-btn-primary" style="width:100%;padding:13px;font-size:15px;margin-top:4px;" onclick="doAdminLogin()" id="loginBtn">Sign In</button>
+      <p style="text-align:center;font-size:12px;color:rgba(160,150,140,0.5);margin-top:16px;">Default password: <span style="color:rgba(212,175,55,0.7)">mahi1234</span></p>
+      <p style="text-align:center;margin-top:16px;"><button onclick="closeAdmin()" style="font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;text-decoration:underline;">← Back to Website</button></p>
+    </div>
+  </div>
+
+  <!-- Main Panel -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="overlay-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
+    <div class="admin-sidebar" id="adminSidebar">
+      <div class="admin-sidebar-logo">
+        <div class="lgo">💄</div>
+        <div><div class="lname">Mahi Makeup</div><div class="lsub">Admin Panel</div></div>
+      </div>
+      <div class="admin-nav">
+        <button class="admin-nav-item active" data-tab="dashboard" onclick="switchTab('dashboard',this)">📊 Dashboard</button>
+        <button class="admin-nav-item" data-tab="services" onclick="switchTab('services',this)">✂️ Services</button>
+        <button class="admin-nav-item" data-tab="offers" onclick="switchTab('offers',this)">🏷️ Offers</button>
+        <button class="admin-nav-item" data-tab="reviews" onclick="switchTab('reviews',this)" id="reviewsTabBtn">⭐ Reviews</button>
+      </div>
+      <div class="admin-nav-bottom">
+        <a href="#" class="admin-nav-item" onclick="window.open('/','_blank');return false;">👁 View Website</a>
+        <button class="admin-nav-item" style="color:#f87171;" onclick="adminLogout()">🚪 Sign Out</button>
+      </div>
+    </div>
+    <div class="admin-content-wrap">
+      <div class="admin-topbar">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <button class="admin-mob-toggle" onclick="openSidebar()">☰</button>
+          <span class="admin-topbar-title" id="tabTitle">Dashboard</span>
+        </div>
+        <div style="display:flex;align-items:center;font-size:13px;color:var(--text-dim);">
+          <span class="online-dot"></span> Studio Online
+        </div>
+      </div>
+      <div class="admin-content">
+        <!-- DASHBOARD -->
+        <div class="admin-tab active" id="tab-dashboard">
+          <div class="stats-row" id="adminStats"></div>
+          <div class="quick-actions">
+            <div class="qa-title">Quick Actions</div>
+            <div class="qa-btns">
+              <a href="https://wa.me/916386432826" target="_blank" class="qa-wa">📱 Open WhatsApp</a>
+              <a href="tel:6386432826" class="qa-plain">📞 Call Studio</a>
+              <a href="#" onclick="closeAdmin();return false;" class="qa-plain">👁 View Website</a>
+            </div>
+          </div>
+          <div id="recentReviewsSection"></div>
+        </div>
+        <!-- SERVICES -->
+        <div class="admin-tab" id="tab-services">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+            <div><h2 style="font-size:20px;color:#fff;font-family:'Playfair Display',serif;">Services</h2><p style="font-size:13px;color:var(--text-dim);margin-top:2px;">Manage your salon services</p></div>
+            <button class="admin-btn-primary" onclick="showServiceForm()">+ Add Service</button>
+          </div>
+          <div class="add-form hidden" id="serviceForm">
+            <div class="add-form-title" id="serviceFormTitle">Add New Service</div>
+            <div class="form-row"><div><label class="form-label">Icon</label><input id="svcIcon" class="admin-input" value="✨" maxlength="4" /></div><div><label class="form-label">Name</label><input id="svcName" class="admin-input" placeholder="Service name" /></div></div>
+            <div><label class="form-label">Description</label><input id="svcDesc" class="admin-input" placeholder="Short description..." /></div>
+            <div class="add-form-actions"><button class="admin-btn-primary" onclick="saveService()">Save</button><button class="admin-btn-ghost" onclick="hideServiceForm()">Cancel</button></div>
+          </div>
+          <div class="admin-list" id="servicesList"></div>
+        </div>
+        <!-- OFFERS -->
+        <div class="admin-tab" id="tab-offers">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+            <div><h2 style="font-size:20px;color:#fff;font-family:'Playfair Display',serif;">Offers</h2><p style="font-size:13px;color:var(--text-dim);margin-top:2px;">Manage your promotional offers</p></div>
+            <button class="admin-btn-primary" onclick="showOfferForm()">+ Add Offer</button>
+          </div>
+          <div class="add-form hidden" id="offerForm">
+            <div class="add-form-title" id="offerFormTitle">Add New Offer</div>
+            <div class="form-row"><div><label class="form-label">Title</label><input id="ofrTitle" class="admin-input" placeholder="Bridal Package" /></div><div><label class="form-label">Discount</label><input id="ofrDiscount" class="admin-input" placeholder="20% Off" /></div></div>
+            <div><label class="form-label">Description</label><textarea id="ofrDesc" class="admin-input" rows="2" placeholder="Offer details..."></textarea></div>
+            <div class="add-form-actions"><button class="admin-btn-primary" onclick="saveOffer()">Save</button><button class="admin-btn-ghost" onclick="hideOfferForm()">Cancel</button></div>
+          </div>
+          <div class="admin-list" id="offersList"></div>
+        </div>
+        <!-- REVIEWS -->
+        <div class="admin-tab" id="tab-reviews">
+          <div style="margin-bottom:20px;"><h2 style="font-size:20px;color:#fff;font-family:'Playfair Display',serif;">Customer Reviews</h2><p style="font-size:13px;color:var(--text-dim);margin-top:2px;" id="reviewsCountLabel"></p></div>
+          <div id="adminReviewsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+const DEFAULT_SERVICES = [
+  { id:'1', icon:'👰', name:'Bridal Makeup', nameHi:'ब्राइडल मेकअप', desc:'Complete luxury bridal makeover for your special day', descHi:'आपके खास दिन के लिए संपूर्ण लक्ज़री ब्राइडल मेकओवर' },
+  { id:'2', icon:'✨', name:'Acne Treatments', nameHi:'एक्ने ट्रीटमेंट', desc:'Specialized care for clear, glowing skin', descHi:'साफ, चमकती त्वचा के लिए विशेष देखभाल' },
+  { id:'3', icon:'💅', name:'Acrylic Nails', nameHi:'एक्रेलिक नेल्स', desc:'Premium nail extensions and nail art', descHi:'प्रीमियम नेल एक्सटेंशन और नेल आर्ट' },
+  { id:'4', icon:'💨', name:'Blow Dry', nameHi:'ब्लो ड्राई', desc:'Professional styling and volume blowout', descHi:'प्रोफेशनल स्टाइलिंग और वॉल्यूम' },
+  { id:'5', icon:'🍯', name:'Body Waxing', nameHi:'बॉडी वैक्सिंग', desc:'Smooth and painless hair removal', descHi:'चिकनी और दर्दरहित बालों को हटाना' },
+  { id:'6', icon:'🎀', name:'Braids', nameHi:'ब्रेड्स', desc:'Intricate and stylish hair braiding', descHi:'जटिल और स्टाइलिश हेयर ब्रेडिंग' },
+  { id:'7', icon:'👁️', name:'Eyebrow Shaping', nameHi:'आइब्रो शेपिंग', desc:'Precision threading and shaping', descHi:'सटीक थ्रेडिंग और आकार देना' },
+  { id:'8', icon:'✂️', name:'Hairstyling', nameHi:'हेयरस्टाइलिंग', desc:'Custom styles for any occasion', descHi:'किसी भी अवसर के लिए कस्टम स्टाइल' },
+  { id:'9', icon:'💄', name:'Makeup Services', nameHi:'मेकअप सर्विसेज़', desc:'Party and event makeup application', descHi:'पार्टी और इवेंट मेकअप' },
+  { id:'10', icon:'🦶', name:'Manicure & Pedicure', nameHi:'मैनीक्योर और पेडीक्योर', desc:'Luxury hand and foot care treatments', descHi:'लक्ज़री हाथ और पैरों की देखभाल' },
+  { id:'11', icon:'💆', name:'Massage', nameHi:'मसाज', desc:'Relaxing therapeutic massage sessions', descHi:'आरामदायक चिकित्सीय मालिश' },
+  { id:'12', icon:'🧴', name:'Shampoo & Conditioning', nameHi:'शैम्पू और कंडीशनिंग', desc:'Deep cleansing and hair nourishment', descHi:'गहरी सफाई और पोषण' },
+  { id:'13', icon:'🌸', name:'Spa Services', nameHi:'स्पा सर्विसेज़', desc:'Rejuvenating full spa treatment packages', descHi:'तरोताजा करने वाले स्पा उपचार' },
+  { id:'14', icon:'🎊', name:'Wedding & Event Prep', nameHi:'वेडिंग और इवेंट तैयारी', desc:'Comprehensive pre-event beauty packages', descHi:'व्यापक प्री-इवेंट सौंदर्य पैकेज' },
+];
+const DEFAULT_OFFERS = [
+  { id:'1', title:'Bridal Package', titleHi:'ब्राइडल पैकेज', discount:'20% Off', desc:'Complete pre-bridal & bridal makeup package.', descHi:'संपूर्ण प्री-ब्राइडल और ब्राइडल मेकअप पैकेज।' },
+  { id:'2', title:'Festive Special', titleHi:'त्यौहार स्पेशल', discount:'Flat ₹500 Off', desc:'On any service above ₹2000 this season.', descHi:'इस सीज़न ₹2000 से ऊपर की किसी भी सेवा पर।' },
+  { id:'3', title:'First Visit Discount', titleHi:'पहली मुलाकात छूट', discount:'15% Off', desc:'Welcome! Enjoy a special rate on your first visit.', descHi:'स्वागत है! पहली मुलाकात पर विशेष दर का आनंद लें।' },
+];
+const DEFAULT_REVIEWS = [
+  { name:'Priya Sharma', rating:5, review:'Absolutely loved my bridal makeup! Mahi is a true artist. The luxury experience was totally worth it.', date:'2025-01-10T10:00:00Z' },
+  { name:'Anjali Verma', rating:5, review:'Best salon in Beniganj! Very professional and the spa services are incredibly relaxing.', date:'2025-01-15T12:00:00Z' },
+  { name:'Sneha Singh', rating:4, review:'Got acrylic nails done here and they look stunning. Highly recommend!', date:'2025-01-20T09:00:00Z' },
+  { name:'Kavita Tiwari', rating:5, review:'The acne treatment worked wonders. The ambiance of the studio is so premium.', date:'2025-01-25T11:00:00Z' },
+];
+
+// ─── LOCAL STORAGE HELPERS ───────────────────────────────────────────────────
+function getLS(k, def) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch(e) { return def; } }
+function setLS(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }
+
+let services = getLS('mahi_services', DEFAULT_SERVICES);
+let offers   = getLS('mahi_offers',   DEFAULT_OFFERS);
+let reviews  = getLS('mahi_reviews',  DEFAULT_REVIEWS);
+let currentLang = 'en';
+let currentRating = 5;
+let editingServiceId = null;
+let editingOfferId = null;
+
+// ─── LANGUAGE ────────────────────────────────────────────────────────────────
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'hi' : 'en';
+  const btnLabel = currentLang === 'en' ? '🌐 HI' : '🌐 EN';
+  document.getElementById('langToggle').textContent = btnLabel;
+  document.getElementById('langToggleMob').textContent = '🌐';
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = el.getAttribute('data-' + currentLang) || el.getAttribute('data-en');
+  });
+  renderServices();
+  renderOffers();
+}
+
+function t(enVal, hiVal) { return currentLang === 'hi' ? hiVal : enVal; }
+
+// ─── NAVBAR ──────────────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// Mobile lang toggle display
+function handleResize() {
+  const mob = window.innerWidth <= 900;
+  document.getElementById('langToggleMob').style.display = mob ? 'flex' : 'none';
+}
+window.addEventListener('resize', handleResize);
+handleResize();
+
+// ─── SCROLL ANIMATIONS ───────────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ─── RENDER SERVICES ─────────────────────────────────────────────────────────
+function renderServices() {
+  const grid = document.getElementById('servicesGrid');
+  grid.innerHTML = services.map(s => `
+    <div class="service-card fade-in">
+      <div class="service-icon">${s.icon}</div>
+      <h3>${currentLang === 'hi' && s.nameHi ? s.nameHi : s.name}</h3>
+      <p>${currentLang === 'hi' && s.descHi ? s.descHi : s.desc}</p>
+      <a href="https://wa.me/916386432826?text=Hi, I want to book ${encodeURIComponent(s.name)}" target="_blank" class="service-link">
+        ${t('Book Now','अभी बुक करें')} <span class="arr">→</span>
+      </a>
+    </div>
+  `).join('');
+  grid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+// ─── RENDER OFFERS ────────────────────────────────────────────────────────────
+function renderOffers() {
+  const grid = document.getElementById('offersGrid');
+  grid.innerHTML = offers.map(o => `
+    <div class="offer-card fade-in">
+      <div class="offer-badge">${o.discount}</div>
+      <h3>${currentLang === 'hi' && o.titleHi ? o.titleHi : o.title}</h3>
+      <p>${currentLang === 'hi' && o.descHi ? o.descHi : o.desc}</p>
+      <a href="https://wa.me/916386432826?text=I want to claim ${encodeURIComponent(o.title)} offer." target="_blank" class="offer-btn">
+        ${t('Claim Offer','ऑफ़र प्राप्त करें')}
+      </a>
+    </div>
+  `).join('');
+  grid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+// ─── RENDER REVIEWS ───────────────────────────────────────────────────────────
+function renderReviews() {
+  const grid = document.getElementById('reviewsGrid');
+  const defaultRevs = DEFAULT_REVIEWS;
+  const allRevs = [...defaultRevs, ...reviews.filter(r => r._user)];
+  grid.innerHTML = (allRevs.length ? allRevs : reviews).map(r => `
+    <div class="review-card fade-in">
+      <div class="stars">${starsHtml(r.rating)}</div>
+      <p class="review-text">"${r.review}"</p>
+      <p class="review-author">— ${r.name}</p>
+    </div>
+  `).join('');
+  grid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+function starsHtml(n) {
+  return Array.from({length:5}, (_,i) => `<span class="star ${i<n?'':'empty'}">★</span>`).join('');
+}
+
+// ─── STAR RATING UI ───────────────────────────────────────────────────────────
+currentRating = 5;
+document.getElementById('starRating').addEventListener('click', function(e) {
+  const s = e.target.closest('.s');
+  if (!s) return;
+  currentRating = parseInt(s.getAttribute('data-val'));
+  document.querySelectorAll('#starRating .s').forEach((el,i) => {
+    el.classList.toggle('active', i < currentRating);
+  });
+});
+
+// ─── SUBMIT REVIEW ────────────────────────────────────────────────────────────
+function submitReview() {
+  const name = document.getElementById('revName').value.trim();
+  const text = document.getElementById('revText').value.trim();
+  if (!name || !text) { alert('Please fill in your name and review.'); return; }
+  const rev = { name, rating: currentRating, review: text, date: new Date().toISOString(), _user: true };
+  reviews = [...reviews, rev];
+  setLS('mahi_reviews', reviews);
+  document.getElementById('reviewFormContent').classList.add('hidden');
+  document.getElementById('reviewSuccess').classList.remove('hidden');
+  setTimeout(() => {
+    document.getElementById('reviewFormContent').classList.remove('hidden');
+    document.getElementById('reviewSuccess').classList.add('hidden');
+    document.getElementById('revName').value = '';
+    document.getElementById('revText').value = '';
+    currentRating = 5;
+    document.querySelectorAll('#starRating .s').forEach(el => el.classList.add('active'));
+  }, 3000);
+  renderReviews();
+}
+
+// ─── BOOKING FLOW ─────────────────────────────────────────────────────────────
+function showStep(n) {
+  document.querySelectorAll('.book-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+}
+function sendOtp() {
+  const p = document.getElementById('phoneInput').value;
+  if (p.length < 10) { alert('Please enter a valid 10-digit phone number.'); return; }
+  const btn = event.target; btn.textContent = ''; btn.innerHTML = '<span class="spinner"></span> Sending...'; btn.disabled = true;
+  setTimeout(() => { btn.disabled = false; btn.textContent = currentLang === 'hi' ? 'OTP भेजें' : 'Send OTP'; document.getElementById('otpSentMsg').textContent = 'OTP sent to +91 ' + p; showStep(2); }, 1400);
+}
+function verifyOtp() {
+  const otp = document.getElementById('otpInput').value;
+  const btn = event.target; btn.textContent = ''; btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
+  setTimeout(() => {
+    btn.disabled = false; btn.textContent = currentLang === 'hi' ? 'OTP सत्यापित करें' : 'Verify OTP';
+    if (otp === '1234') { showStep(3); }
+    else { alert('Invalid OTP. Use 1234 for demo.'); }
+  }, 1200);
+}
+function processPayment() {
+  const btn = event.target; btn.textContent = ''; btn.innerHTML = '<span class="spinner"></span> Processing...'; btn.disabled = true;
+  setTimeout(() => { btn.disabled = false; showStep(4); }, 1800);
+}
+function resetBooking() {
+  document.getElementById('phoneInput').value = '';
+  document.getElementById('otpInput').value = '';
+  showStep(1);
+}
+
+// ─── ADMIN PANEL ─────────────────────────────────────────────────────────────
+const ADMIN_PW = 'mahi1234';
+const AUTH_KEY = 'mahi_admin_auth';
+
+function openAdmin() {
+  document.getElementById('admin-overlay').classList.add('show');
+  if (getLS(AUTH_KEY, false)) {
+    showAdminPanel();
+  } else {
+    document.getElementById('adminLogin').classList.add('show');
+    document.getElementById('adminPanel').classList.remove('show');
+  }
+}
+function closeAdmin() {
+  document.getElementById('admin-overlay').classList.remove('show');
+}
+function doAdminLogin() {
+  const pw = document.getElementById('adminPw').value;
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Signing in...';
+  setTimeout(() => {
+    btn.disabled = false; btn.textContent = 'Sign In';
+    if (pw === ADMIN_PW) { setLS(AUTH_KEY, true); showAdminPanel(); }
+    else { document.getElementById('loginError').classList.remove('hidden'); }
+  }, 800);
+}
+function showAdminPanel() {
+  document.getElementById('adminLogin').classList.remove('show');
+  document.getElementById('adminPanel').classList.add('show');
+  renderAdminStats();
+  renderServicesList();
+  renderOffersList();
+  renderAdminReviews();
+}
+function adminLogout() {
+  setLS(AUTH_KEY, false);
+  document.getElementById('adminPanel').classList.remove('show');
+  document.getElementById('adminLogin').classList.add('show');
+  document.getElementById('adminPw').value = '';
+}
+function togglePw() {
+  const inp = document.getElementById('adminPw');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+function openSidebar() {
+  document.getElementById('adminSidebar').classList.add('open');
+  document.getElementById('sidebarBackdrop').classList.add('show');
+}
+function closeSidebar() {
+  document.getElementById('adminSidebar').classList.remove('open');
+  document.getElementById('sidebarBackdrop').classList.remove('show');
+}
+function switchTab(tab, el) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-item').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  el.classList.add('active');
+  document.getElementById('tabTitle').textContent = el.textContent.replace(/^[^\w]+/, '');
+  closeSidebar();
+}
+
+// ─── ADMIN STATS ─────────────────────────────────────────────────────────────
+function renderAdminStats() {
+  const allRevs = getLS('mahi_reviews', DEFAULT_REVIEWS);
+  const avg = allRevs.length ? (allRevs.reduce((s,r)=>s+r.rating,0)/allRevs.length).toFixed(1) : '—';
+  document.getElementById('adminStats').innerHTML = [
+    {icon:'✂️', num: services.length, lbl:'Total Services'},
+    {icon:'🏷️', num: offers.length,   lbl:'Active Offers'},
+    {icon:'⭐', num: allRevs.length,  lbl:'Customer Reviews'},
+    {icon:'📊', num: avg,             lbl:'Avg Rating'},
+  ].map(s=>`<div class="s-card"><div class="s-icon">${s.icon}</div><div class="s-num">${s.num}</div><div class="s-lbl">${s.lbl}</div></div>`).join('');
+
+  const revs = getLS('mahi_reviews', []).filter(r=>r._user).slice(-3).reverse();
+  document.getElementById('recentReviewsSection').innerHTML = revs.length ? `
+    <div style="margin-top:8px;"><h3 style="font-size:16px;color:#fff;font-family:'Playfair Display',serif;margin-bottom:14px;">Recent Reviews</h3>
+    ${revs.map(r=>`<div class="rev-item">
+      <div class="rev-avatar">${r.name[0].toUpperCase()}</div>
+      <div class="rev-body"><div class="rev-meta"><span class="rev-name">${r.name}</span><span class="rev-stars">${'★'.repeat(r.rating)}</span><span class="rev-date">${new Date(r.date).toLocaleDateString('en-IN')}</span></div>
+      <div class="rev-text">${r.review}</div></div></div>`).join('')}</div>` : '';
+  document.getElementById('reviewsTabBtn').textContent = `⭐ Reviews (${allRevs.length})`;
+}
+
+// ─── ADMIN SERVICES ──────────────────────────────────────────────────────────
+function renderServicesList() {
+  document.getElementById('servicesList').innerHTML = services.map(s=>`
+    <div class="admin-list-item">
+      <div class="ali-icon">${s.icon}</div>
+      <div class="ali-info"><div class="ali-name">${s.name}</div><div class="ali-desc">${s.desc}</div></div>
+      <div class="ali-actions">
+        <button class="ali-edit" onclick="editService('${s.id}')">Edit</button>
+        <button class="admin-btn-danger" onclick="deleteService('${s.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+function showServiceForm() {
+  editingServiceId = null;
+  document.getElementById('serviceFormTitle').textContent = 'Add New Service';
+  document.getElementById('svcIcon').value = '✨';
+  document.getElementById('svcName').value = '';
+  document.getElementById('svcDesc').value = '';
+  document.getElementById('serviceForm').classList.remove('hidden');
+}
+function hideServiceForm() { document.getElementById('serviceForm').classList.add('hidden'); editingServiceId = null; }
+function editService(id) {
+  const s = services.find(x=>x.id===id); if (!s) return;
+  editingServiceId = id;
+  document.getElementById('serviceFormTitle').textContent = 'Edit Service';
+  document.getElementById('svcIcon').value = s.icon;
+  document.getElementById('svcName').value = s.name;
+  document.getElementById('svcDesc').value = s.desc;
+  document.getElementById('serviceForm').classList.remove('hidden');
+}
+function saveService() {
+  const icon = document.getElementById('svcIcon').value.trim() || '✨';
+  const name = document.getElementById('svcName').value.trim();
+  const desc = document.getElementById('svcDesc').value.trim();
+  if (!name) { alert('Please enter a service name.'); return; }
+  if (editingServiceId) {
+    services = services.map(s => s.id === editingServiceId ? {...s, icon, name, desc} : s);
+  } else {
+    services.push({ id: Date.now().toString(), icon, name, nameHi:'', desc, descHi:'' });
+  }
+  setLS('mahi_services', services);
+  hideServiceForm();
+  renderServicesList();
+  renderServices();
+  renderAdminStats();
+}
+function deleteService(id) {
+  if (!confirm('Delete this service?')) return;
+  services = services.filter(s=>s.id!==id);
+  setLS('mahi_services', services);
+  renderServicesList();
+  renderServices();
+  renderAdminStats();
+}
+
+// ─── ADMIN OFFERS ─────────────────────────────────────────────────────────────
+function renderOffersList() {
+  document.getElementById('offersList').innerHTML = offers.map(o=>`
+    <div class="admin-list-item">
+      <div class="ali-icon">🏷️</div>
+      <div class="ali-info">
+        <div class="ali-name">${o.title} <span style="font-size:11px;padding:2px 10px;border-radius:20px;background:rgba(212,175,55,0.15);color:var(--gold);margin-left:6px;">${o.discount}</span></div>
+        <div class="ali-desc">${o.desc}</div>
+      </div>
+      <div class="ali-actions">
+        <button class="ali-edit" onclick="editOffer('${o.id}')">Edit</button>
+        <button class="admin-btn-danger" onclick="deleteOffer('${o.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+function showOfferForm() {
+  editingOfferId = null;
+  document.getElementById('offerFormTitle').textContent = 'Add New Offer';
+  document.getElementById('ofrTitle').value = '';
+  document.getElementById('ofrDiscount').value = '';
+  document.getElementById('ofrDesc').value = '';
+  document.getElementById('offerForm').classList.remove('hidden');
+}
+function hideOfferForm() { document.getElementById('offerForm').classList.add('hidden'); editingOfferId = null; }
+function editOffer(id) {
+  const o = offers.find(x=>x.id===id); if (!o) return;
+  editingOfferId = id;
+  document.getElementById('offerFormTitle').textContent = 'Edit Offer';
+  document.getElementById('ofrTitle').value = o.title;
+  document.getElementById('ofrDiscount').value = o.discount;
+  document.getElementById('ofrDesc').value = o.desc;
+  document.getElementById('offerForm').classList.remove('hidden');
+}
+function saveOffer() {
+  const title = document.getElementById('ofrTitle').value.trim();
+  const discount = document.getElementById('ofrDiscount').value.trim();
+  const desc = document.getElementById('ofrDesc').value.trim();
+  if (!title) { alert('Please enter an offer title.'); return; }
+  if (editingOfferId) {
+    offers = offers.map(o => o.id === editingOfferId ? {...o, title, discount, desc} : o);
+  } else {
+    offers.push({ id: Date.now().toString(), title, titleHi:'', discount, desc, descHi:'' });
+  }
+  setLS('mahi_offers', offers);
+  hideOfferForm();
+  renderOffersList();
+  renderOffers();
+  renderAdminStats();
+}
+function deleteOffer(id) {
+  if (!confirm('Delete this offer?')) return;
+  offers = offers.filter(o=>o.id!==id);
+  setLS('mahi_offers', offers);
+  renderOffersList();
+  renderOffers();
+  renderAdminStats();
+}
+
+// ─── ADMIN REVIEWS ────────────────────────────────────────────────────────────
+function renderAdminReviews() {
+  const allRevs = getLS('mahi_reviews', DEFAULT_REVIEWS);
+  document.getElementById('reviewsCountLabel').textContent = allRevs.length + ' review' + (allRevs.length !== 1 ? 's' : '') + ' submitted';
+  if (!allRevs.length) {
+    document.getElementById('adminReviewsList').innerHTML = '<div style="text-align:center;padding:60px 20px;"><div style="font-size:48px;margin-bottom:12px;">⭐</div><p style="color:#fff;font-weight:600;">No reviews yet</p><p style="color:var(--text-dim);font-size:13px;margin-top:4px;">Reviews submitted by customers will appear here</p></div>';
+    return;
+  }
+  document.getElementById('adminReviewsList').innerHTML = [...allRevs].reverse().map((r,i)=>`
+    <div class="rev-item">
+      <div class="rev-avatar">${(r.name||'?')[0].toUpperCase()}</div>
+      <div class="rev-body">
+        <div class="rev-meta">
+          <span class="rev-name">${r.name}</span>
+          <span class="rev-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</span>
+          <span class="rev-date">${new Date(r.date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</span>
+        </div>
+        <div class="rev-text">${r.review}</div>
+      </div>
+      <button class="admin-btn-danger" onclick="deleteReview(${allRevs.length-1-i})" style="margin-left:8px;flex-shrink:0;">✕</button>
+    </div>`).join('');
+}
+function deleteReview(idx) {
+  if (!confirm('Delete this review?')) return;
+  const allRevs = getLS('mahi_reviews', DEFAULT_REVIEWS);
+  allRevs.splice(idx, 1);
+  setLS('mahi_reviews', allRevs);
+  reviews = allRevs;
+  renderAdminReviews();
+  renderAdminStats();
+  renderReviews();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+renderServices();
+renderOffers();
+renderReviews();
+</script>
+</body>
 </html>
